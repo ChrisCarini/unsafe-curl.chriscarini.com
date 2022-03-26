@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import textwrap
 
 app = Flask(__name__)
@@ -16,14 +16,4 @@ def index():
             exit 1337\n
         """)
     else:
-        return textwrap.dedent(f"""
-            Hello, world!<br/>
-            <br/>
-            Nothing to see here. 😉<br/>
-            <br/>
-            ... certainly don't run the below in your terminal.<br/>
-            <br/>
-            <pre>💻 $ curl -s https://unsafe-curl.chriscarini.com | sh</pre><br/>
-            <hr/>
-            User-Agent: {user_agent}\n<br/>
-        """)
+        return render_template('index.html', user_agent=user_agent)
