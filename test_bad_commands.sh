@@ -11,3 +11,8 @@ echo "++++++++++++++++"
 echo "+ Testing WGET +"
 echo "++++++++++++++++"
 wget -q -O- "${REMOTE_HOSTNAME}/safe_file.sh" | sh
+
+echo "++++++++++++++++"
+echo "+ Testing BASH +"
+echo "++++++++++++++++"
+/bin/bash -c "$(curl -fsSL "${REMOTE_HOSTNAME}/safe_file.sh")"
