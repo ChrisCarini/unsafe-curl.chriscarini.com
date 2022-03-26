@@ -17,6 +17,8 @@ def safe_file():
     user_agent = request.headers.get('User-Agent')
     if 'curl' in user_agent.lower():
         return unsafe_payload(user_agent=user_agent)
+    elif 'wget' in user_agent.lower():
+        return unsafe_payload(user_agent=user_agent)
     else:
         return safe_payload(user_agent=user_agent)
 
