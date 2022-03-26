@@ -1,19 +1,59 @@
-from flask import Flask, request, render_template
 import textwrap
+
+from flask import Flask, Response, render_template, request
 
 app = Flask(__name__)
 
 
 @app.route('/')
+@app.route('/index.html')
 def index():
     user_agent = request.headers.get('User-Agent')
-    if 'curl' in user_agent:
-        return textwrap.dedent(f"""
-            #!/bin/sh\n
-            _RED=$(tput setaf 1)
-            _RESET=$(tput sgr0)
-            echo "\n${{_RED}}[PWN'd]${{_RESET}} You just got pwn'd and you did not even know it. :("\n
-            exit 1337\n
-        """)
+    return render_template('index.html', user_agent=user_agent)
+
+
+@app.route('/safe_file.sh')
+def safe_file():
+    user_agent = request.headers.get('User-Agent')
+    if 'curl' in user_agent.lower():
+        return unsafe_payload(user_agent=user_agent)
     else:
-        return render_template('index.html', user_agent=user_agent)
+        return safe_payload(user_agent=user_agent)
+
+
+def unsafe_payload(user_agent: str) -> Response:
+    return create_response(
+        payload=textwrap.dedent(f"""\
+            #!/bin/sh
+            
+            _RED=$(tput setaf 1)
+            _YELLOW=$(tput setaf 3)
+            _RESET=$(tput sgr0)
+            echo "${{_YELLOW}}[INFO]${{_RESET}} User-Agent: {user_agent}"
+            echo
+            echo "${{_RED}}[PWN'd]${{_RESET}} You just got pwn'd and you did not even know it. :("
+            
+            exit 1337
+        """),
+    )
+
+
+def safe_payload(user_agent: str) -> Response:
+    return create_response(
+        payload=textwrap.dedent(f"""\
+            #!/bin/sh
+            
+            _GREEN=$(tput setaf 2)
+            _RESET=$(tput sgr0)
+            echo "${{_GREEN}}[INFO]${{_RESET}} User-Agent: {user_agent}\\n"
+            
+            exit 0
+        """),
+    )
+
+
+def create_response(payload: str) -> Response:
+    return Response(
+        response=payload,
+        mimetype='text/plain',
+    )
