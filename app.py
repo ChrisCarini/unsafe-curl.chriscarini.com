@@ -7,13 +7,15 @@ app = Flask(__name__)
 
 @app.route('/')
 @app.route('/index.html')
-def index():
+def index() -> Response:
     user_agent = request.headers.get('User-Agent')
-    return render_template('index.html', user_agent=user_agent)
+    return Response(
+        response=render_template('index.html', user_agent=user_agent),
+    )
 
 
 @app.route('/safe_file.sh')
-def safe_file():
+def safe_file() -> Response:
     user_agent = request.headers.get('User-Agent')
     if 'curl' in user_agent.lower():
         return unsafe_payload(user_agent=user_agent)
