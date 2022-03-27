@@ -1,4 +1,5 @@
-import sys, os
+import os
+import sys
 
 print("os.getcwd() = ", os.getcwd())
 
@@ -10,4 +11,4 @@ if sys.executable != INTERP:
 sys.path.append(os.getcwd())
 
 # noinspection PyUnresolvedReferences
-from app import app as application
+from app import app as application  # noqa: F401, E402
