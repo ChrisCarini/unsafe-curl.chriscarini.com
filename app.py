@@ -27,7 +27,8 @@ def safe_file() -> Response:
 
 def unsafe_payload(user_agent: str) -> Response:
     return create_response(
-        payload=textwrap.dedent(f"""\
+        payload=textwrap.dedent(
+            f"""\
             #!/bin/sh
             
             _RED=$(tput setaf 1)
@@ -38,13 +39,15 @@ def unsafe_payload(user_agent: str) -> Response:
             echo "${{_RED}}[PWN'd]${{_RESET}} You just got pwn'd and you did not even know it. :("
             
             exit 1337
-        """),
+        """
+        ),
     )
 
 
 def safe_payload(user_agent: str) -> Response:
     return create_response(
-        payload=textwrap.dedent(f"""\
+        payload=textwrap.dedent(
+            f"""\
             #!/bin/sh
             
             _GREEN=$(tput setaf 2)
@@ -52,7 +55,8 @@ def safe_payload(user_agent: str) -> Response:
             echo "${{_GREEN}}[INFO]${{_RESET}} User-Agent: {user_agent}\\n"
             
             exit 0
-        """),
+        """
+        ),
     )
 
 

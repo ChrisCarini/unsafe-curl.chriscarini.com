@@ -22,3 +22,7 @@ repos:
     rev: v0.942
     hooks:
     -   id: mypy
+-   repo: https://github.com/grantjenks/blue
+    rev: v0.8.0
+    hooks:
+    -   id: blue
