@@ -1,0 +1,37 @@
+name: 🚧 Publish Website
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Deploying Website
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo 📂 Changing to the desired directory...
+            pushd "/home/${{ secrets.SSH_USERNAME }}/${{ secrets.SSH_HOST }}"
+            
+            echo 🗃️ Pulling git files...
+            git pull
+            
+            echo 🗂️ Installing new dependencies...
+            source venv/bin/activate
+            which python3 pip
+            pip install -r requirements.txt
+            deactivate
+            popd
+            
+            echo 🔨 Building Website
+            echo "noop"
+            
+            echo 🔄 Restarting website...
+            touch "/home/${{ secrets.SSH_USERNAME }}/${{ secrets.SSH_HOST }}/tmp/restart.txt"
+            echo ✔️ Website Updated
