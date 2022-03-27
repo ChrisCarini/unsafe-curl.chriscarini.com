@@ -55,7 +55,9 @@ def safe_payload(user_agent: str) -> Response:
             
             _GREEN=$(tput setaf 2)
             _RESET=$(tput sgr0)
-            echo "${{_GREEN}}[INFO]${{_RESET}} User-Agent: {user_agent}\\n"
+            USER_AGENT="{user_agent}"
+            
+            echo "${{_GREEN}}[INFO]${{_RESET}} User-Agent: ${{USER_AGENT}}\\n"
             
             exit 0
         """
