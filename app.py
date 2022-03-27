@@ -50,6 +50,9 @@ def safe_payload(user_agent: str) -> Response:
             f"""\
             #!/bin/sh
             
+            # Run via:
+            #       $ curl -s https://unsafe-curl.chriscarini.com/safe_file.sh | sh
+            
             _GREEN=$(tput setaf 2)
             _RESET=$(tput sgr0)
             echo "${{_GREEN}}[INFO]${{_RESET}} User-Agent: {user_agent}\\n"
