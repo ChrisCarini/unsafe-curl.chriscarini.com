@@ -1,6 +1,6 @@
 blue==0.8.0
 flake8==4.0.1
-flask==2.0.3
+flask==2.2.5
 isort==5.10.1
 mypy==0.942
 pip==23.3
