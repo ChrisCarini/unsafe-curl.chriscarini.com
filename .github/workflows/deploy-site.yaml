@@ -20,7 +20,8 @@ jobs:
             pushd "/home/${{ secrets.SSH_USERNAME }}/${{ secrets.SSH_HOST }}"
             
             echo 🗃️ Pulling git files...
-            git pull
+            git fetch --all
+            git reset --hard origin/main
             
             echo 🗂️ Installing new dependencies...
             source venv/bin/activate

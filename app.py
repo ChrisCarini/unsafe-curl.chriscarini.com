@@ -5,21 +5,21 @@ from flask import Flask, Response, render_template, request
 app = Flask(__name__)
 
 
-@app.route('/')
-@app.route('/index.html')
+@app.route("/")
+@app.route("/index.html")
 def index() -> Response:
-    user_agent = request.headers.get('User-Agent')
+    user_agent = request.headers.get("User-Agent")
     return Response(
-        response=render_template('index.html', user_agent=user_agent),
+        response=render_template("index.html", user_agent=user_agent),
     )
 
 
-@app.route('/safe_file.sh')
+@app.route("/safe_file.sh")
 def safe_file() -> Response:
-    user_agent = request.headers.get('User-Agent', '')
-    if 'curl' in user_agent.lower():
+    user_agent = request.headers.get("User-Agent", "")
+    if "curl" in user_agent.lower():
         return unsafe_payload(user_agent=user_agent)
-    elif 'wget' in user_agent.lower():
+    elif "wget" in user_agent.lower():
         return unsafe_payload(user_agent=user_agent)
     else:
         return safe_payload(user_agent=user_agent)
@@ -68,5 +68,5 @@ def safe_payload(user_agent: str) -> Response:
 def create_response(payload: str) -> Response:
     return Response(
         response=payload,
-        mimetype='text/plain',
+        mimetype="text/plain",
     )

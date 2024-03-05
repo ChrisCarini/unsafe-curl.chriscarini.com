@@ -9,7 +9,8 @@ echo "Enter webhost username: " && read WEBHOST_USERNAME
 echo "Setup venv in remote machine..."
 ssh -T "${REMOTE_HOSTNAME}" << EO_SSH
     pushd "/home/${WEBHOST_USERNAME}/${REMOTE_HOSTNAME}"
-    git pull
+    git fetch --all
+    git reset --hard origin/main
     source venv/bin/activate
     which python3 pip
     pip install -r requirements.txt
