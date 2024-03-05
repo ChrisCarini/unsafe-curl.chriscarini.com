@@ -10,7 +10,7 @@ LOCAL_APPLICATION_PATH = str(
 )
 sys.path.insert(0, LOCAL_APPLICATION_PATH)
 
-from flup.server.fcgi import WSGIServer  # noqa: E402
+from flup.server.fcgi import WSGIServer  # type: ignore # noqa: E402
 
 from app import app  # noqa: E402
 
@@ -24,7 +24,7 @@ class ScriptNamePatch:
         return self.app(environ, start_response)
 
 
-app = ScriptNamePatch(app)
+app = ScriptNamePatch(app)  # type: ignore
 
 if __name__ == "__main__":
     WSGIServer(app).run()
