@@ -1,6 +1,6 @@
 black==24.3.0
 flake8==7.0.0
-flask==3.0.2
+flask==3.0.3
 flup==1.0.3
 isort==5.13.2
 mypy==1.9.0
