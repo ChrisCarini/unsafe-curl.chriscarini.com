@@ -5,4 +5,4 @@ flup==1.0.3
 isort==5.13.2
 mypy==1.11.2
 pip-chill==1.0.3
-pre-commit==4.0.0
+pre-commit==4.0.1
