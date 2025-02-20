@@ -16,13 +16,7 @@ ssh -T "${REMOTE_HOSTNAME}" << EO_SSH
     pushd "/home/${WEBHOST_USERNAME}/${REMOTE_HOSTNAME}"
     rm favicon.*
     git clone https://github.com/ChrisCarini/unsafe-curl.chriscarini.com.git .
-    which python3
-    virtualenv venv
-    ln -s venv/bin/activate activate
-    source activate
-    which python3 pip
-    pip install -r requirements.txt
-    deactivate
+    ./init_remote.sh
     popd
 EO_SSH
 
