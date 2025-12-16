@@ -3,6 +3,6 @@ flake8==7.3.0
 flask==3.1.2
 flup==1.0.3
 isort==7.0.0
-mypy==1.19.0
+mypy==1.19.1
 pip-chill==1.0.3
 pre-commit==4.5.0
