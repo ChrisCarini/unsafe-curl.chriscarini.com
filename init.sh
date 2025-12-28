@@ -15,7 +15,7 @@ echo "Setup venv in remote machine..."
 ssh -T "${REMOTE_HOSTNAME}" << EO_SSH
     pushd "/home/${WEBHOST_USERNAME}/${REMOTE_HOSTNAME}"
     rm favicon.*
-    git clone https://github.com/ChrisCarini/unsafe-curl.chriscarini.com.git .
+    git clone "https://github.com/ChrisCarini/${REMOTE_HOSTNAME}.git" .
     ./init_remote.sh
     popd
 EO_SSH
